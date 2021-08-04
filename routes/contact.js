@@ -59,48 +59,7 @@ router.post('/getDetails', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
-router.get('/status/:code',(req,res)=>{
-    const request =  await Request.find()
-    const _code = req.params.code
-    if (_code === request.code) return request.status
 
-})
-router.patch('/updateStatus',(req,res)=>{
-    const query = {
-        code : req.body.code
-    }
-    const updateDoc = {
-        $set:{
-            "status" : req.body.status
-        }
-    }
-    try{
-        const result = await User.findOneAndUpdate(query,update_doc,{useFindAndModify : false , new:true})
-        res.status(221).json({message:"Updated Succesfully",doc:result})
-    }
-    catch(e){
-        res.status(421).json({message : error.message})
-    }
-})
-router.post('/login', async (req, res)=>{
-    const {error} = loginValidation(req.body)
-    
-    if (error) return res.status(400).send(error.details[0].message)
 
-    const user = await User.findOne({username : req.body.username})
-    if (!user) return res.status(400).send("Email not found")
-    
-    const validPass = await bcrypt.compare(req.body.password,user.password)
-    if (!validPass) return res.status(400).send("Password not found")
-    
-    
-    if (verified === false) return res.send("email not confirmed")
-    else{
-        res.send("Login successfull")
-        const token = jwt.sign({_id : user._id},process.env.ACCESS_TOKEN_SECRET)
-    
-        console.log(token)
-    }
-});
 
 module.exports = router
