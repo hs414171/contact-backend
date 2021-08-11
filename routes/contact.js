@@ -37,9 +37,9 @@ router.post('/getDetails', async (req, res) => {
                 <p> name = ${_name} </p>
                 <p> name = ${_phone} </p>
                 <p> name = ${_email} </p>
-                <h1> Subject and message <h1>
-                <u><b><p> Message </p><b></u>
-                <p>Subject = ${_subject}
+                <h1> Subject and message </h1>
+                <u><b><p> Message </p></b></u>
+                <p>Subject = ${_subject}</p>
                 <p> ${_message} </p>
 
             </div>
